@@ -5,7 +5,7 @@
 
 ## Project Overview
 <p align="center">
-    <img src="archive/spring_compound-2_bodies.png" width = 500
+    <img src="archive/spring_compound-2_bodies.png" width = 500>
 </p>
 
 In this project, a rigid bar is connected to a sliding block along a
