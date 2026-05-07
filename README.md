@@ -17,7 +17,7 @@ horizontal tracks. The sliding block is connected to a spring that stretches and
 The applied forces are, 
 
 1. Spring attached to block 1, $F = -k x_1$ where $k = 10~N/m$
-2. gravity acting on block 1 and the rigid bar, $F_1 = -m_1g\hat{j}$ and $F_2 = -m_2 g\hat{j}$ where $m_1 = 0.1~kg$ and $m_2 = 0.3~kg$
+2. gravity acting on block 1 and the rigid bar, $F_1 = -m_1g\hat{j}$ and $F_2 = -m_2 g\hat{j}$ where $m_1 = 0.1$ kg and $m_2 = 0.3$ kg
  
 In this project, you need to 
 
