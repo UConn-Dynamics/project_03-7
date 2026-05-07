@@ -68,8 +68,8 @@ Where $A(\theta_i)$ is the rotation matrix:
 $$
 A(\theta_i) =
 \begin{bmatrix}
-\cos\theta_i & -\sin\theta_i \\
-\sin\theta_i & \cos\theta_i
+    \cos\theta_i & -\sin\theta_i \\
+    \sin\theta_i & \cos\theta_i
 \end{bmatrix}
 $$
 
@@ -83,13 +83,13 @@ $$
 \vec{r}_{pin,1} = 
 \vec{R}_1 + A(\theta_1) 
 \begin{bmatrix} 
-0 \\ 
-0 
+    0 \\ 
+    0 
 \end{bmatrix} 
-\= 
+= 
 \begin{bmatrix} 
-x_1 \\
-y_1 
+    x_1 \\
+    y_1 
 \end{bmatrix}
 $$
 
