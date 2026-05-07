@@ -60,7 +60,7 @@ $$
 If a the center of body i is located at $\vec{R}_i = [x_i, y_i]^T$ in the global coordinate system and orientation $\theta_i$, then point p located at $\vec{s}^{(i)} = [s_x, s_y]^T$ in the body's local frame has global position:
 
 $$
-\vec{r}_P = \vec{R}_i + A(\theta_i) \, \vec{s}^{(i)}
+\vec{r}_P = \vec{R}_i + A(\theta_i) \vec{s}^{(i)}
 $$
 
 Where $A(\theta_i)$ is the rotation matrix:
@@ -152,7 +152,7 @@ $$
 
 ### Bar Free End (Body 2)
 
-The other end of the bar (the free, swinging end) is at local coordinates $\vec{s}_{free} = [+L/2, \, 0]^T$. Therefore, this point can be expressed in global coordinates as:
+The other end of the bar (the free, swinging end) is at local coordinates $\vec{s}_{free} = [L/2,~ 0]^T$. Therefore, this point can be expressed in global coordinates as:
 
 $$
 \vec{r}_{free} = 
@@ -166,19 +166,19 @@ The constraint equations can now be assembled.
 
 ### Constraint $C_1$: Sliding Joint (Position)
 
-The block slides along a horizontal track at $y = 0$. The center of the block must remain at $y_1 = 0$:
+The block slides along a horizontal track at $y = 0$, so the center of the block must remain at $y_1 = 0$:
 
 $$
-\boxed{C_1 = y_1 = 0}
+C_1 = y_1 = 0
 $$
 
-This eliminates vertical motion of the block and the track must exert a normal force to maintain this constraint.
+This eliminates vertical motion of the block, and the track must exert a normal force to maintain this constraint.
 
 ### Constraint $C_2$: Sliding Joint (Orientation)
 
 Due to the sliding joint, the orientation of the block is constrained to:
 $$
-\boxed{C_2 = \theta_1 = 0}
+C_2 = \theta_1 = 0
 $$
 
 In this case, the constraint force is a moment (torque) that keeps $\theta_1 = 0$.
@@ -200,7 +200,7 @@ $$
 Rearranging so the constraint equals zero:
 
 $$
-\boxed{C_3 = x_1 - x_2 + \frac{L}{2}\cos\theta_2 = 0}
+C_3 = x_1 - x_2 + \frac{L}{2}\cos\theta_2 = 0
 $$
 
 ### Constraint $C_4$: Pin Joint ($y$-Component)
@@ -211,7 +211,7 @@ y_1 = y_2 - \frac{L}{2}\sin\theta_2
 $$
 
 $$
-\boxed{C_4 = y_1 - y_2 + \frac{L}{2}\sin\theta_2 = 0}
+C_4 = y_1 - y_2 + \frac{L}{2}\sin\theta_2 = 0
 $$
 
 ### Constraint Equations
@@ -250,10 +250,10 @@ C_q =
 \end{bmatrix}
 $$
 
-Thus, the velocity constraint equation $C_q \, \dot{\vec{q}} = - \vec{C}_t$ can be constructed. Since $\vec{C}_t = \vec{0}$, the velocity constraint equation simplifies to:
+Thus, the velocity constraint equation $C_q \dot{\vec{q}} = - \vec{C}_t$ can be constructed. Since $\vec{C}_t = \vec{0}$, the velocity constraint equation simplifies to:
 
 $$
-C_q \, \dot{\vec{q}} = \vec{0}
+C_q \dot{\vec{q}} = \vec{0}
 $$
 
 and can be expressed in full as:
@@ -285,19 +285,19 @@ $$
 The acceleration constraint equation can be found by taking the time derivative of the velocity equation:
 
 $$
-\frac{d}{dt} \left(C_q \, \dot{\vec{q}}\right) + \frac{d}{dt}\left(\vec{C}_t\right) = \vec{0}
+\frac{d}{dt} \left(C_q \dot{\vec{q}}\right) + \frac{d}{dt}\left(\vec{C}_t\right) = \vec{0}
 $$
 
 The equation above can be rewritten as:
 
 $$
-C_q \, \ddot{\vec{q}} = \vec{Q}_d
+C_q \ddot{\vec{q}} = \vec{Q}_d
 $$
 
 where:
 
 $$
-\vec{Q}_d = -\frac{d C_q}{dt} \, \dot{\vec{q}} - \frac{d \vec{C}_t}{dt}
+\vec{Q}_d = -\frac{d C_q}{dt} \dot{\vec{q}} - \frac{d \vec{C}_t}{dt}
 $$
 
 Since $\theta_2$ changes with time, $\frac{d}{dt} f\left(\theta_2\right) = \frac{d f}{d \theta_2} \dot{\theta}_2$. So:
@@ -315,7 +315,7 @@ $$
 Therefore, 
 
 $$
-\frac{d C_q}{dt} \, \dot{\vec{q}} = 
+\frac{d C_q}{dt} \dot{\vec{q}} = 
 \begin{bmatrix}
     0 \\
     0 \\
@@ -421,7 +421,7 @@ The generalized external force vector can now be created using the applied force
 $$
 \vec{Q}_e =
 \begin{bmatrix}
-    -k \, x_1 \\
+    -k x_1 \\
     -m_1 g \\
     0 \\
     0 \\
@@ -430,7 +430,7 @@ $$
 \end{bmatrix}
 \=
 \begin{bmatrix}
-    -10 \, x_1 \\
+    -10 x_1 \\
     -0.981 \\
     0 \\
     0 \\
@@ -488,7 +488,7 @@ $$
 \end{bmatrix}
 \=
 \begin{bmatrix}
-    -k \, x_1 \\
+    -k x_1 \\
     -m_1 g \\
     0 \\
     0 \\
@@ -530,7 +530,7 @@ $$
 \end{bmatrix}
 \=
 \begin{bmatrix}
-    -10 \, x_1 \\
+    -10 x_1 \\
     -0.981 \\
     0 \\
     0 \\
@@ -549,13 +549,13 @@ In this case, given that $M$ is a $6 \times 6$ mass matrix, $C_{\vec{q}}$ is a $
 Instabilities resulting from integration at the acceleration level are corrected using the  the Baumgarte stabilization technique. In order to do so, the acceleration level constraints are re-expressed as:
 
 $$
-C_q \, \ddot{\vec{q}} = \vec{Q}_d - 2\alpha \left( C_q \dot{\vec{q}} + \vec{C}_t \right) - \beta^2 \vec{C}
+C_q \ddot{\vec{q}} = \vec{Q}_d - 2\alpha \left( C_q \dot{\vec{q}} + \vec{C}_t \right) - \beta^2 \vec{C}
 $$
 
 and again, given that $\vec{C}_t = \vec{0}$, the equation above can be rewritten as:
 
 $$
-\boxed{C_q \, \ddot{\vec{q}} = \vec{Q}_d - 2\alpha \, C_q \dot{\vec{q}} - \beta^2 \vec{C}}
+C_q \ddot{\vec{q}} = \vec{Q}_d - 2\alpha C_q \dot{\vec{q}} - \beta^2 \vec{C}
 $$
 
 where $\alpha = 5$ and $\beta = 5$ are stabilization parameters that control how aggressively the instabilities are corrected.
@@ -603,7 +603,7 @@ $$
 Thus the system is released from rest with the bar in the horizontal position and gravity will pull the bar downward, initiating the motion of the system.
 
 ### Extracting Constraint Forces
-The Lagrange multipliers $\vec{\lambda} = [\lambda_1,\, \lambda_2,\, \lambda_3,\, \lambda_4]^T$ represent the magnitudes of the constraint forces associated with each constraint equation. Where each $\lambda_i$ is associated with one constraint:
+The Lagrange multipliers $\vec{\lambda} = [\lambda_1, \lambda_2, \lambda_3, \lambda_4]^T$ represent the magnitudes of the constraint forces associated with each constraint equation. Where each $\lambda_i$ is associated with one constraint:
 
 - $\lambda_1 \rightarrow C_1 = y_1 = 0 \rightarrow$ Normal force from track on block (y-direction)
 - $\lambda_2 \rightarrow C_2 = \theta_1 = 0 \rightarrow$ Moment from track preventing block rotation
@@ -613,7 +613,7 @@ The Lagrange multipliers $\vec{\lambda} = [\lambda_1,\, \lambda_2,\, \lambda_3,\
 The constraint forces on each generalized coordinate are expressed as
 
 $$
-\vec{Q}_c = C_q^T \, \vec{\lambda}
+\vec{Q}_c = C_q^T \vec{\lambda}
 $$
 
 where:
