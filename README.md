@@ -537,14 +537,29 @@ The system now has an equal ammount of equations as unknowns, and can be solved 
 Therefore:
 
 $$
-\vec{q}_0 = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0.2 \\ 0 \\ 0 \end{bmatrix}, \qquad
-\dot{\vec{q}}_0 = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+\vec{q}_0 = 
+\begin{bmatrix} 0 \\ 
+0 \\ 
+0 \\ 
+0.2 \\ 
+0 \\ 
+0 
+\end{bmatrix}, \qquad
+\dot{\vec{q}}_0 = 
+\begin{bmatrix} 
+0 \\ 
+0 \\ 
+0 \\ 
+0 \\ 
+0 \\ 
+0 
+\end{bmatrix}
 $$
 
 Thus the system is released from rest with the bar in the horizontal position and gravity will pull the bar downward, initiating the motion of the system.
 
 ### Extracting Constraint Forces
-The Lagrange multipliers $\vec{\lambda} = [\lambda_1, \lambda_2, \lambda_3, \lambda_4]^T$ represent the magnitudes of the constraint forces associated with each constraint equation. Where each $\lambda_i$ is associated with one constraint:
+The Lagrange multipliers $\vec{\lambda} = [\lambda_1,\, \lambda_2,\, \lambda_3,\, \lambda_4]^T$ represent the magnitudes of the constraint forces associated with each constraint equation. Where each $\lambda_i$ is associated with one constraint:
 
 - $\lambda_1 \rightarrow C_1 = y_1 = 0 \rightarrow$ Normal force from track on block (y-direction)
 - $\lambda_2 \rightarrow C_2 = \theta_1 = 0 \rightarrow$ Moment from track preventing block rotation
@@ -570,7 +585,10 @@ C_q^T \vec{\lambda} =
 0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2
 \end{bmatrix}
 \begin{bmatrix}
-\lambda_1 \\ \lambda_2 \\ \lambda_3 \\ \lambda_4
+\lambda_1 \\ 
+\lambda_2 \\ 
+\lambda_3 \\ 
+\lambda_4
 \end{bmatrix}
 $$
 
