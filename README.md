@@ -177,6 +177,7 @@ This eliminates vertical motion of the block, and the track must exert a normal 
 ### Constraint $C_2$: Sliding Joint (Orientation)
 
 Due to the sliding joint, the orientation of the block is constrained to:
+
 $$
 C_2 = \theta_1 = 0
 $$
