@@ -80,7 +80,17 @@ For this project, there are 6 coordinates and 2 degrees of freedom (the block is
 The pin joint connects at the center of the block. In the block's local frame, the center is at the origin: $\vec{s}_{pin,1} = [0, 0]^T$. Therefore, the pin location on the block in global coordinates is:
 
 $$
-\vec{r}_{pin,1} = \vec{R}_1 + A(\theta_1) \begin{bmatrix} 0 \\ 0 \end{bmatrix} = \begin{bmatrix} x_1 \\ y_1 \end{bmatrix}
+\vec{r}_{pin,1} = 
+\vec{R}_1 + A(\theta_1) 
+\begin{bmatrix} 
+0 \\ 
+0 
+\end{bmatrix} 
+\= 
+\begin{bmatrix} 
+x_1 \\
+y_1 
+\end{bmatrix}
 $$
 
 ### Bar Pin End (Body 2)
