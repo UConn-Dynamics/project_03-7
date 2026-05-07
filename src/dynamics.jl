@@ -25,7 +25,7 @@ Build the augmented LHS matrix for the MBD system.
 - `q`: generalized coordinate vector
 
 # Returns
-- 10×10 matrix
+- 10x10 matrix
 """
 function LHS_augmented(q)
 
@@ -163,5 +163,95 @@ function solve_initial_position(theta2_0, x1_0)
 
 end
 
+# ----------------------------------------------------------------
+# Run Full Dynamic Simulation
+# ----------------------------------------------------------------
+
+"""
+    run_dynamics(; theta2_0=0.0, x1_0=0.0, t_end=5.0, alpha=5.0, beta=5.0)
+
+Run the full augmented MBD simulation.
+
+# Keyword Arguments
+- `theta2_0`: initial bar angle (rad), default 0.0 (horizontal)
+- `x1_0`:     initial block x-position (m), default 0.0 (spring natural length)
+- `t_end`:    total simulation time (s), default 5.0
+- `alpha`:    Baumgarte stabilization parameter α, default 5.0
+- `beta`:     Baumgarte stabilization parameter β, default 5.0
+
+# Returns
+- `solution`: ODE solution object
+- `q0`:       initial position vector
+"""
+function run_dynamics(; theta2_0=0.0, x1_0=0.0, t_end=5.0, alpha=5.0, beta=5.0)
+
+    # ----- Step 1: Solve for Initial Positions -------------------------
+    q0 = solve_initial_position(theta2_0, x1_0)
+
+    # ----- Step 2: Set Initial Velocities to Zero (released from rest) -
+    dq0 = zeros(n)
+
+    # ----- Step 3: Assemble Initial State Vector -----------------------
+    y0 = [q0; dq0]    # 12-element state: [→q₀; →q̇₀]
+
+    # ----- Step 4: Define and Solve the ODE ----------------------------
+    time_span = (0.0, t_end)                                    # simulation interval
+    params    = [alpha, beta]                                   # Baumgarte parameters
+    problem   = ODEProblem(mbd_ode!, y0, time_span, params)     # define the ODE problem
+    solution  = solve(problem, Tsit5())                         # solve using Tsit5
+
+    return solution, q0
+
+end
+
+# -------------------------------------------------------------------
+# Extract Lagrange Multipliers (Constraint Forces) at Each Time Step
+# -------------------------------------------------------------------
+
+"""
+    compute_lambda(solution, t_steps)
+
+Re-solve the augmented system at each output time step to extract the Lagrange multipliers.
+
+# Arguments
+- `solution`: ODE solution object
+- `t_steps`:  vector of time values at which to evaluate
+
+# Returns
+- `lambda_all`: Nx4 matrix of Lagrange multipliers at each time step
+"""
+function compute_lambda(solution, t_steps)
+
+    N = length(t_steps)                 # number of output time steps
+    lambda_all = zeros(N, nc)           # storage for Lagrange Multiplier values (N × 4)
+
+    for i in 1:N
+
+        t  = t_steps[i]                 # current time
+        yi = solution(t)                # interpolate state at this time
+
+        q  = yi[1:n]                    # extract positions
+        dq = yi[n+1:2*n]                # extract velocities
+
+        A   = LHS_augmented(q)          # build 10×10 augmented matrix
+        rhs = RHS_augmented(q, dq)      # build 10-element RHS (without Baumgarte)
+
+        sols = A \ rhs                  # solve the system
+
+        lambda_all[i, :] = sols[n+1:n+nc]    # extract Lagrange multipliers
+
+    end
+
+    return lambda_all
+
+end
+
+# ----------------------------------------------------------------
+# Exported Functions/Parameters
+# ----------------------------------------------------------------
+
+export run_dynamics, compute_lambda
+export LHS_augmented, RHS_augmented, mbd_ode!
+export n, nc
 
 end
