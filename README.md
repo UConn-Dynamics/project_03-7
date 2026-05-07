@@ -183,7 +183,7 @@ C_2 \\
 C_3 \\
 C_4
 \end{bmatrix}
-=
+/=
 \begin{bmatrix}
 y_1 \\
 \theta_1 \\
