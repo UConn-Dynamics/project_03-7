@@ -543,7 +543,7 @@ $$
 \end{bmatrix}
 $$
 
-In this case, given that $M$ is a $6 \times 6$ mass matrix, $C_{\vec{q}}$ is a $4 \times 6$ Jacobian, $\vec{Q}\_e$ contains the external forces, and $\vec{Q}\_d$ collects the known terms from differentiating the constraints twice. The unknowns are the accelerations $\ddot{\vec{q}}$, and the Lagrange multipliers ($\lambda_{1}$, $\lambda_{2}$, $\lambda_{3}$, $\lambda_{4}$). Therefore, at each time step, a $10 \times 10$ linear system must be solved.
+In this case, $M$ is a $6 \times 6$ mass matrix, $C_{\vec{q}}$ is a $4 \times 6$ Jacobian, $\vec{Q}\_e$ contains the external forces, and $\vec{Q}\_d$ collects the known terms from differentiating the constraints twice. The unknowns are the accelerations $\ddot{\vec{q}}$, and the Lagrange multipliers ($\lambda_{1}$, $\lambda_{2}$, $\lambda_{3}$, $\lambda_{4}$). Therefore, at each time step, a $10 \times 10$ linear system must be solved.
 
 ### Baumgarte Stabilization
 Instabilities resulting from integration at the acceleration level are corrected using the  the Baumgarte stabilization technique. In order to do so, the acceleration level constraints are re-expressed as:
@@ -565,7 +565,7 @@ Before starting the simulation, the following parameters are required:
 - $\vec{q}_0$: initial positions that satisfy all constraints
 - $\dot{\vec{q}}_0$: initial velocities that satisfy all constraints (the simplest selection is releasng the objects from rest, so $\dot{\vec{q}}_0 = \vec{0}$)
 
-Given that there are 4 constraint equations and 6 unknowns, the following must be specified to determine the initial configuration of the system:
+Given that there are 4 constraint equations and 6 unknowns, the following can be specified to determine the initial configuration of the system:
 
 - $x_1(0) = 0$ m (block at the spring's natural length)
 - $\theta_2(0) = 0$ rad (bar initially horizontal)
