@@ -183,7 +183,7 @@ C_2 \\
 C_3 \\
 C_4
 \end{bmatrix}
-/=
+\=
 \begin{bmatrix}
 y_1 \\
 \theta_1 \\
@@ -229,9 +229,8 @@ $$
 \dot{x}_2 \\
 \dot{y}_2 \\
 \dot{\theta}_2 \\
-
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
 0 \\
 0 \\
@@ -311,7 +310,7 @@ $$
 \ddot{y}_2 \\
 \ddot{\theta}_2 
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
 0 \\
 0 \\
@@ -356,7 +355,7 @@ m_1 & 0 & 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 & m_2 & 0 \\
 0 & 0 & 0 & 0 & 0 & I_2
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
 0.1 & 0 & 0 & 0 & 0 & 0 \\
 0 & 0.1 & 0 & 0 & 0 & 0 \\
@@ -381,7 +380,7 @@ $$
 -m_2 g \\
 0
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
 -10 \, x_1 \\
 -0.981 \\
@@ -405,7 +404,7 @@ C_{\vec{q}} & 0
 \ddot{\vec{q}} \\
 \vec{\lambda}
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
 \vec{Q}_e \\
 \vec{Q}_d
@@ -438,7 +437,7 @@ m_1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  \\
 \lambda_{3} \\
 \lambda_{4}
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
 -k \, x_1 \\
 -m_1 g \\
@@ -480,7 +479,7 @@ $$
 \lambda_{3} \\
 \lambda_{4}
 \end{bmatrix}
-=
+\=
 \begin{bmatrix}
 -10 \, x_1 \\
 -0.981 \\
