@@ -95,7 +95,7 @@ $$
 
 ### Bar Pin End (Body 2)
 
-The bar's local $x$-axis runs along its length. The bar has length $L$, and its center of mass is at the midpoint, therefore the end that connects to the block is at local coordinates $\vec{s}_{pin,2} = [-L/2, \, 0]^T$ 
+The bar's local $x$-axis runs along its length. The bar has length $L$, and its center of mass is at the midpoint, therefore the end that connects to the block is at local coordinates $\vec{s}_{pin,2} = [-L/2,~ 0]^T$ 
 
 To express this point in global coordinates:
 
