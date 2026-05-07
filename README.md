@@ -324,7 +324,12 @@ $$
 In the augmented MBD approach, each body contributes a $3 \times 3$ block to the diagonal mass matrix:
 
 $$
-M_i = \begin{bmatrix} m_i & 0 & 0 \\ 0 & m_i & 0 \\ 0 & 0 & I_i \end{bmatrix}
+M_i = 
+\begin{bmatrix} 
+m_i & 0 & 0 \\
+0 & m_i & 0 \\ 
+0 & 0 & I_i 
+\end{bmatrix}
 $$
 
 where $m_i$ is the body's mass and $I_i$ is its moment of inertia about its center of mass.
@@ -412,6 +417,7 @@ C_{\vec{q}} & 0
 $$
 
 which can be fully written as:
+
 $$
 \begin{bmatrix}
 m_1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  \\
@@ -419,7 +425,7 @@ m_1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  \\
 0 & 0 & I_1 & 0 & 0 & 0 & 0 & 1 & 0 & 0  \\
 0 & 0 & 0 & m_2 & 0 & 0 & 0 & 0 & -1 & 0 \\
 0 & 0 & 0 & 0 & m_2 & 0 & 0 & 0 & 0 & -1 \\
-0 & 0 & 0 & 0 & 0 & I_2 & 0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2\\
+0 & 0 & 0 & 0 & 0 & I_2 & 0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2 \\
 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
 1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 & 0 & 0 & 0 & 0 \\
