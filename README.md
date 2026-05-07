@@ -86,7 +86,7 @@ $$
     0 \\ 
     0 
 \end{bmatrix} 
-= 
+\= 
 \begin{bmatrix} 
     x_1 \\
     y_1 
@@ -103,8 +103,8 @@ $$
 \vec{r}_{pin,2} = 
 \vec{R}_2 + A(\theta_2) 
 \begin{bmatrix} 
--L/2 \\ 
-0 
+    -L/2 \\ 
+    0 
 \end{bmatrix}
 $$
 
@@ -113,30 +113,30 @@ Expanding the matrix-vector product:
 $$
 A(\theta_2) 
 \begin{bmatrix} 
--L/2 \\ 
-0 
+    -L/2 \\ 
+    0 
 \end{bmatrix}
 \= 
 \begin{bmatrix} 
-\cos\theta_2 & -\sin\theta_2 \\ 
-\sin\theta_2 & \cos\theta_2 
+    \cos\theta_2 & -\sin\theta_2 \\ 
+    \sin\theta_2 & \cos\theta_2 
 \end{bmatrix} 
 \begin{bmatrix} 
--L/2 \\ 
-0 
+    -L/2 \\ 
+    0 
 \end{bmatrix}
 $$
 
 $$
 = 
 \begin{bmatrix} 
-(-L/2)\cos\theta_2 + (0)(-\sin\theta_2) \\ 
-(-L/2)\sin\theta_2 + (0)(\cos\theta_2) 
+    (-L/2)\cos\theta_2 + (0)(-\sin\theta_2) \\ 
+    (-L/2)\sin\theta_2 + (0)(\cos\theta_2) 
 \end{bmatrix}
 \= 
 \begin{bmatrix} 
--\frac{L}{2}\cos\theta_2 \\ 
--\frac{L}{2}\sin\theta_2 
+    -\frac{L}{2}\cos\theta_2 \\ 
+    -\frac{L}{2}\sin\theta_2 
 \end{bmatrix}
 $$
 
@@ -145,8 +145,8 @@ Therefore:
 $$
 \vec{r}_{pin,2} = 
 \begin{bmatrix} 
-x_2 - \frac{L}{2}\cos\theta_2 \\ 
-y_2 - \frac{L}{2}\sin\theta_2 
+    x_2 - \frac{L}{2}\cos\theta_2 \\ 
+    y_2 - \frac{L}{2}\sin\theta_2 
 \end{bmatrix}
 $$
 
@@ -157,8 +157,8 @@ The other end of the bar (the free, swinging end) is at local coordinates $\vec{
 $$
 \vec{r}_{free} = 
 \begin{bmatrix}
- x_2 + \frac{L}{2}\cos\theta_2 \\ 
- y_2 + \frac{L}{2}\sin\theta_2 
+    x_2 + \frac{L}{2}\cos\theta_2 \\ 
+    y_2 + \frac{L}{2}\sin\theta_2 
 \end{bmatrix}
 $$
 
@@ -221,17 +221,17 @@ Therefore, the full constraint vector can be written as:
 $$
 \vec{C}(\vec{q}, t) =
 \begin{bmatrix}
-C_1 \\
-C_2 \\
-C_3 \\
-C_4
+    C_1 \\
+    C_2 \\
+    C_3 \\
+    C_4
 \end{bmatrix}
 \=
 \begin{bmatrix}
-y_1 \\
-\theta_1 \\
-x_1 - x_2 + \frac{L}{2}\cos\theta_2 \\
-y_1 - y_2 + \frac{L}{2}\sin\theta_2
+    y_1 \\
+    \theta_1 \\
+    x_1 - x_2 + \frac{L}{2}\cos\theta_2 \\
+    y_1 - y_2 + \frac{L}{2}\sin\theta_2
 \end{bmatrix}
 = \vec{0}
 $$
@@ -243,10 +243,10 @@ The constraint Jacobian, $C_q = \frac{\partial \vec{C}}{\partial \vec{q}}$ can n
 $$
 C_q =
 \begin{bmatrix}
-0 & 1 & 0 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 \\
-1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 \\
-0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2
+    0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 \\
+    1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 \\
+    0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2
 \end{bmatrix}
 $$
 
@@ -260,25 +260,25 @@ and can be expressed in full as:
 
 $$
 \begin{bmatrix}
-0 & 1 & 0 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 \\
-1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 \\
-0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2
+    0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 \\
+    1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 \\
+    0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2
 \end{bmatrix}
 \begin{bmatrix}
-\dot{x}_1 \\
-\dot{y}_1 \\
-\dot{\theta}_1 \\
-\dot{x}_2 \\
-\dot{y}_2 \\
-\dot{\theta}_2 \\
+    \dot{x}_1 \\
+    \dot{y}_1 \\
+    \dot{\theta}_1 \\
+    \dot{x}_2 \\
+    \dot{y}_2 \\
+    \dot{\theta}_2 \\
 \end{bmatrix}
 \=
 \begin{bmatrix}
-0 \\
-0 \\
-0 \\
-0 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
 \end{bmatrix}
 $$
 
@@ -305,10 +305,10 @@ Since $\theta_2$ changes with time, $\frac{d}{dt} f\left(\theta_2\right) = \frac
 $$
 \frac{d C_q}{d t} = 
 \begin{bmatrix}
-0 & 0 & 0 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 & 0 & \left(-\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2 \\
-0 & 0 & 0 & 0 & 0 & \left(-\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2
+    0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & \left(-\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2 \\
+    0 & 0 & 0 & 0 & 0 & \left(-\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2
 \end{bmatrix}
 $$
 
@@ -317,10 +317,10 @@ Therefore,
 $$
 \frac{d C_q}{dt} \, \dot{\vec{q}} = 
 \begin{bmatrix}
-0 \\
-0 \\
-\left(-\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
-\left(-\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2 
+    0 \\
+    0 \\
+    \left(-\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
+    \left(-\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2 
 \end{bmatrix}
 $$
 
@@ -329,10 +329,10 @@ Since $\vec{C}_t = \vec{0}$, $\frac{d C_t}{d t} = \vec{0}$, thus:
 $$
 \vec{Q}_d =
 \begin{bmatrix}
-0 \\
-0 \\
-\left(\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
-\left(\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2 
+    0 \\
+    0 \\
+    \left(\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
+    \left(\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2 
 \end{bmatrix}
 $$
 
@@ -340,25 +340,25 @@ and the final acceleration constraint equation can be constructed:
 
 $$
 \begin{bmatrix}
-0 & 1 & 0 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 \\
-1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 \\
-0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2
+    0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 \\
+    1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 \\
+    0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2
 \end{bmatrix}
 \begin{bmatrix}
-\ddot{x}_1 \\
-\ddot{y}_1 \\
-\ddot{\theta}_1 \\
-\ddot{x}_2 \\
-\ddot{y}_2 \\
-\ddot{\theta}_2 
+    \ddot{x}_1 \\
+    \ddot{y}_1 \\
+    \ddot{\theta}_1 \\
+    \ddot{x}_2 \\
+    \ddot{y}_2 \\
+    \ddot{\theta}_2 
 \end{bmatrix}
 \=
 \begin{bmatrix}
-0 \\
-0 \\
-\left(\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
-\left(\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2 
+    0 \\
+    0 \\
+    \left(\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
+    \left(\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2 
 \end{bmatrix}
 $$
 
@@ -369,9 +369,9 @@ In the augmented MBD approach, each body contributes a $3 \times 3$ block to the
 $$
 M_i = 
 \begin{bmatrix} 
-m_i & 0 & 0 \\
-0 & m_i & 0 \\ 
-0 & 0 & I_i 
+    m_i & 0 & 0 \\
+    0 & m_i & 0 \\ 
+    0 & 0 & I_i 
 \end{bmatrix}
 $$
 
@@ -396,21 +396,21 @@ Therefore, the full mass matrix can be written as:
 $$
 M =
 \begin{bmatrix}
-m_1 & 0 & 0 & 0 & 0 & 0 \\
-0 & m_1 & 0 & 0 & 0 & 0 \\
-0 & 0 & I_1 & 0 & 0 & 0 \\
-0 & 0 & 0 & m_2 & 0 & 0 \\
-0 & 0 & 0 & 0 & m_2 & 0 \\
-0 & 0 & 0 & 0 & 0 & I_2
+    m_1 & 0 & 0 & 0 & 0 & 0 \\
+    0 & m_1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & I_1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & m_2 & 0 & 0 \\
+    0 & 0 & 0 & 0 & m_2 & 0 \\
+    0 & 0 & 0 & 0 & 0 & I_2
 \end{bmatrix}
 \=
 \begin{bmatrix}
-0.1 & 0 & 0 & 0 & 0 & 0 \\
-0 & 0.1 & 0 & 0 & 0 & 0 \\
-0 & 0 & I_1 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0.3 & 0 & 0 \\
-0 & 0 & 0 & 0 & 0.3 & 0 \\
-0 & 0 & 0 & 0 & 0 & 0.004
+    0.1 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0.1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & I_1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0.3 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0.3 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0.004
 \end{bmatrix}
 $$
 
@@ -421,21 +421,21 @@ The generalized external force vector can now be created using the applied force
 $$
 \vec{Q}_e =
 \begin{bmatrix}
--k \, x_1 \\
--m_1 g \\
-0 \\
-0 \\
--m_2 g \\
-0
+    -k \, x_1 \\
+    -m_1 g \\
+    0 \\
+    0 \\
+    -m_2 g \\
+    0
 \end{bmatrix}
 \=
 \begin{bmatrix}
--10 \, x_1 \\
--0.981 \\
-0 \\
-0 \\
--2.943 \\
-0
+    -10 \, x_1 \\
+    -0.981 \\
+    0 \\
+    0 \\
+    -2.943 \\
+    0
 \end{bmatrix}
 $$ 
 
@@ -445,59 +445,59 @@ The augmented technique stacks Newton's second law with the acceleration level c
 
 $$
 \begin{bmatrix}
-M & C_{\vec{q}}^T \\
-C_{\vec{q}} & 0
-\end{bmatrix}
-\begin{bmatrix}
-\ddot{\vec{q}} \\
-\vec{\lambda}
+    M & C_{\vec{q}}^T \\
+    C_{\vec{q}} & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+    \ddot{\vec{q}} \\
+    \vec{\lambda}
 \end{bmatrix}
 \=
 \begin{bmatrix}
-\vec{Q}_e \\
-\vec{Q}_d
-\end{bmatrix}
+    \vec{Q}_e \\
+    \vec{Q}_d
+    \end{bmatrix}
 $$
 
 which can be fully written as:
 
 $$
 \begin{bmatrix}
-m_1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  \\
-0 & m_1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1  \\
-0 & 0 & I_1 & 0 & 0 & 0 & 0 & 1 & 0 & 0  \\
-0 & 0 & 0 & m_2 & 0 & 0 & 0 & 0 & -1 & 0 \\
-0 & 0 & 0 & 0 & m_2 & 0 & 0 & 0 & 0 & -1 \\
-0 & 0 & 0 & 0 & 0 & I_2 & 0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2 \\
-0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 & 0 & 0 & 0 & 0 \\
-0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2 & 0 & 0 & 0 & 0
+    m_1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  \\
+    0 & m_1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1  \\
+    0 & 0 & I_1 & 0 & 0 & 0 & 0 & 1 & 0 & 0  \\
+    0 & 0 & 0 & m_2 & 0 & 0 & 0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & 0 & m_2 & 0 & 0 & 0 & 0 & -1 \\
+    0 & 0 & 0 & 0 & 0 & I_2 & 0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2 \\
+    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 & 0 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2 & 0 & 0 & 0 & 0
 \end{bmatrix}
 \begin{bmatrix}
-\ddot{x}_1 \\
-\ddot{y}_1 \\
-\ddot{\theta}_1 \\
-\ddot{x}_2 \\
-\ddot{y}_2 \\
-\ddot{\theta}_2 \\
-\lambda_{1} \\
-\lambda_{2} \\
-\lambda_{3} \\
-\lambda_{4}
+    \ddot{x}_1 \\
+    \ddot{y}_1 \\
+    \ddot{\theta}_1 \\
+    \ddot{x}_2 \\
+    \ddot{y}_2 \\
+    \ddot{\theta}_2 \\
+    \lambda_{1} \\
+    \lambda_{2} \\
+    \lambda_{3} \\
+    \lambda_{4}
 \end{bmatrix}
 \=
 \begin{bmatrix}
--k \, x_1 \\
--m_1 g \\
-0 \\
-0 \\
--m_2 g \\
-0 \\
-0 \\
-0 \\
-\left(\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
-\left(\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2
+    -k \, x_1 \\
+    -m_1 g \\
+    0 \\
+    0 \\
+    -m_2 g \\
+    0 \\
+    0 \\
+    0 \\
+    \left(\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
+    \left(\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2
 \end{bmatrix}
 $$
 
@@ -505,41 +505,41 @@ or further as:
 
 $$
 \begin{bmatrix}
-0.1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  \\
-0 & 0.1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1  \\
-0 & 0 & I_1 & 0 & 0 & 0 & 0 & 1 & 0 & 0  \\
-0 & 0 & 0 & 0.3 & 0 & 0 & 0 & 0 & -1 & 0 \\
-0 & 0 & 0 & 0 & 0.3 & 0 & 0 & 0 & 0 & -1 \\
-0 & 0 & 0 & 0 & 0 & 0.004 & 0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2\\
-0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 & 0 & 0 & 0 & 0 \\
-0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2 & 0 & 0 & 0 & 0
+    0.1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  \\
+    0 & 0.1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1  \\
+    0 & 0 & I_1 & 0 & 0 & 0 & 0 & 1 & 0 & 0  \\
+    0 & 0 & 0 & 0.3 & 0 & 0 & 0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & 0 & 0.3 & 0 & 0 & 0 & 0 & -1 \\
+    0 & 0 & 0 & 0 & 0 & 0.004 & 0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2\\
+    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    1 & 0 & 0 & -1 & 0 & -\frac{L}{2}\sin\theta_2 & 0 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 & -1 & \frac{L}{2}\cos\theta_2 & 0 & 0 & 0 & 0
 \end{bmatrix}
 \begin{bmatrix}
-\ddot{x}_1 \\
-\ddot{y}_1 \\
-\ddot{\theta}_1 \\
-\ddot{x}_2 \\
-\ddot{y}_2 \\
-\ddot{\theta}_2 \\
-\lambda_{1} \\
-\lambda_{2} \\
-\lambda_{3} \\
-\lambda_{4}
+    \ddot{x}_1 \\
+    \ddot{y}_1 \\
+    \ddot{\theta}_1 \\
+    \ddot{x}_2 \\
+    \ddot{y}_2 \\
+    \ddot{\theta}_2 \\
+    \lambda_{1} \\
+    \lambda_{2} \\
+    \lambda_{3} \\
+    \lambda_{4}
 \end{bmatrix}
 \=
 \begin{bmatrix}
--10 \, x_1 \\
--0.981 \\
-0 \\
-0 \\
--2.943 \\
-0 \\
-0 \\
-0 \\
-\left(\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
-\left(\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2
+    -10 \, x_1 \\
+    -0.981 \\
+    0 \\
+    0 \\
+    -2.943 \\
+    0 \\
+    0 \\
+    0 \\
+    \left(\frac{L}{2}\cos\theta_2\right)\dot{\theta}_2^2 \\
+    \left(\frac{L}{2}\sin\theta_2\right)\dot{\theta}_2^2
 \end{bmatrix}
 $$
 
@@ -581,21 +581,22 @@ Therefore:
 
 $$
 \vec{q}_0 = 
-\begin{bmatrix} 0 \\ 
-0 \\ 
-0 \\ 
-0.2 \\ 
-0 \\ 
-0 
+\begin{bmatrix} 
+    0 \\ 
+    0 \\ 
+    0 \\ 
+    0.2 \\ 
+    0 \\ 
+    0 
 \end{bmatrix}, \qquad
 \dot{\vec{q}}_0 = 
 \begin{bmatrix} 
-0 \\ 
-0 \\ 
-0 \\ 
-0 \\ 
-0 \\ 
-0 
+    0 \\ 
+    0 \\ 
+    0 \\ 
+    0 \\ 
+    0 \\ 
+    0 
 \end{bmatrix}
 $$
 
@@ -620,18 +621,18 @@ where:
 $$
 C_q^T \vec{\lambda} =
 \begin{bmatrix}
-0 & 0 & 1 & 0 \\
-1 & 0 & 0 & 1 \\
-0 & 1 & 0 & 0 \\
-0 & 0 & -1 & 0 \\
-0 & 0 & 0 & -1 \\
-0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2
+    0 & 0 & 1 & 0 \\
+    1 & 0 & 0 & 1 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & -1 \\
+    0 & 0 & -\frac{L}{2}\sin\theta_2 & \frac{L}{2}\cos\theta_2
 \end{bmatrix}
 \begin{bmatrix}
-\lambda_1 \\ 
-\lambda_2 \\ 
-\lambda_3 \\ 
-\lambda_4
+    \lambda_1 \\ 
+    \lambda_2 \\ 
+    \lambda_3 \\ 
+    \lambda_4
 \end{bmatrix}
 $$
 
