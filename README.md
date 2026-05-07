@@ -128,7 +128,7 @@ A(\theta_2)
 $$
 
 $$
-= 
+\= 
 \begin{bmatrix} 
     (-L/2)\cos\theta_2 + (0)(-\sin\theta_2) \\ 
     (-L/2)\sin\theta_2 + (0)(\cos\theta_2) 
