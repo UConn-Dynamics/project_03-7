@@ -48,12 +48,12 @@ Therefore, the generalized coordinate vector for this project can be expressed a
 $$
 \vec{q} =
 \begin{bmatrix}
-x_1 \\
-y_1 \\
-\theta_1 \\
-x_2 \\
-y_2 \\
-\theta_2 \\
+    x_1 \\
+    y_1 \\
+    \theta_1 \\
+    x_2 \\
+    y_2 \\
+    \theta_2 \\
 \end{bmatrix}
 $$
 
@@ -100,25 +100,54 @@ The bar's local $x$-axis runs along its length. The bar has length $L$, and its 
 To express this point in global coordinates:
 
 $$
-\vec{r}_{pin,2} = \vec{R}_2 + A(\theta_2) \begin{bmatrix} -L/2 \\ 0 \end{bmatrix}
+\vec{r}_{pin,2} = 
+\vec{R}_2 + A(\theta_2) 
+\begin{bmatrix} 
+-L/2 \\ 
+0 
+\end{bmatrix}
 $$
 
 Expanding the matrix-vector product:
 
 $$
-A(\theta_2) \begin{bmatrix} -L/2 \\ 0 \end{bmatrix}
-= \begin{bmatrix} \cos\theta_2 & -\sin\theta_2 \\ \sin\theta_2 & \cos\theta_2 \end{bmatrix} \begin{bmatrix} -L/2 \\ 0 \end{bmatrix}
+A(\theta_2) 
+\begin{bmatrix} 
+-L/2 \\ 
+0 
+\end{bmatrix}
+\= 
+\begin{bmatrix} 
+\cos\theta_2 & -\sin\theta_2 \\ 
+\sin\theta_2 & \cos\theta_2 
+\end{bmatrix} 
+\begin{bmatrix} 
+-L/2 \\ 
+0 
+\end{bmatrix}
 $$
 
 $$
-= \begin{bmatrix} (-L/2)\cos\theta_2 + (0)(-\sin\theta_2) \\ (-L/2)\sin\theta_2 + (0)(\cos\theta_2) \end{bmatrix}
-= \begin{bmatrix} -\frac{L}{2}\cos\theta_2 \\ -\frac{L}{2}\sin\theta_2 \end{bmatrix}
+= 
+\begin{bmatrix} 
+(-L/2)\cos\theta_2 + (0)(-\sin\theta_2) \\ 
+(-L/2)\sin\theta_2 + (0)(\cos\theta_2) 
+\end{bmatrix}
+\= 
+\begin{bmatrix} 
+-\frac{L}{2}\cos\theta_2 \\ 
+-\frac{L}{2}\sin\theta_2 
+\end{bmatrix}
 $$
 
 Therefore:
 
 $$
-\vec{r}_{pin,2} = \begin{bmatrix} x_2 - \frac{L}{2}\cos\theta_2 \\ y_2 - \frac{L}{2}\sin\theta_2 \end{bmatrix}
+\vec{r}_{pin,2} = 
+\begin{bmatrix} 
+x_2 - \frac{L}{2}\cos\theta_2 \\ 
+y_2 - \frac{L}{2}\sin\theta_2 
+\end{bmatrix}
 $$
 
 ### Bar Free End (Body 2)
@@ -126,7 +155,11 @@ $$
 The other end of the bar (the free, swinging end) is at local coordinates $\vec{s}_{free} = [+L/2, \, 0]^T$. Therefore, this point can be expressed in global coordinates as:
 
 $$
-\vec{r}_{free} = \begin{bmatrix} x_2 + \frac{L}{2}\cos\theta_2 \\ y_2 + \frac{L}{2}\sin\theta_2 \end{bmatrix}
+\vec{r}_{free} = 
+\begin{bmatrix}
+ x_2 + \frac{L}{2}\cos\theta_2 \\ 
+ y_2 + \frac{L}{2}\sin\theta_2 
+\end{bmatrix}
 $$
 
 The constraint equations can now be assembled.
