@@ -247,10 +247,45 @@ function compute_lambda(solution, t_steps)
 end
 
 # ----------------------------------------------------------------
+# Compute Accelerations at Each Time Step
+# ----------------------------------------------------------------
+
+"""
+    compute_accelerations(solution, t_steps)
+
+Re-solve the augmented system at each output time step to extract the accelerations.
+"""
+function compute_accelerations(solution, t_steps)
+
+    N = length(t_steps)
+    ddq_all = zeros(N, n)
+
+    for i in 1:N
+
+        t  = t_steps[i]
+        yi = solution(t)
+
+        q  = yi[1:n]
+        dq = yi[n+1:2*n]
+
+        A   = LHS_augmented(q)
+        rhs = RHS_augmented(q, dq)
+
+        sols = A \ rhs
+
+        ddq_all[i, :] = sols[1:n]    # extract accelerations (first 6 elements)
+
+    end
+
+    return ddq_all
+
+end
+
+# ----------------------------------------------------------------
 # Exported Functions/Parameters
 # ----------------------------------------------------------------
 
-export run_dynamics, compute_lambda
+export run_dynamics, compute_lambda, compute_accelerations
 export LHS_augmented, RHS_augmented, mbd_ode!
 export n, nc
 
