@@ -115,7 +115,7 @@ function main()
     # ----- Generate Animations ------------------------------------------
     println("\nGenerating animations...")
     animate_mechanism(t_steps, solution, filename="results/mechanism.gif", fps=30)
-    animate_mechanism_forces(t_steps, solution, lambda_all, filename="results/mechanism_forces.gif", fps=30)
+    animate_mechanism_forces(t_steps, solution, lambda_all, filename="results/mechanism_forces.gif", fps=10)
 
     # ----- Summary ------------------------------------------------------
     println("\n" * "=" ^ 100)

@@ -203,8 +203,8 @@ function animate_mechanism(t_steps, solution; filename="results/mechanism.gif", 
     all_xs = vcat(all_x1, all_x2, all_end_x, all_pin_x)
     all_ys = vcat(all_y1, all_y2, all_end_y, all_pin_y)
 
-    pad = 0.08                                                   # padding
-    xl  = (minimum(all_xs) - track_len, maximum(all_xs) + pad)   # account for spring/wall
+    pad = 0.08                                                              # padding
+    xl  = (min(minimum(all_xs), - track_len) - pad, maximum(all_xs) + pad)   # account for spring/wall
     yl  = (minimum(all_ys) - pad, maximum(all_ys) + pad)
 
     anim = @animate for i in 1:N
@@ -217,7 +217,7 @@ function animate_mechanism(t_steps, solution; filename="results/mechanism.gif", 
             xlabel="x (m)", ylabel="y (m)",
             title="Spring-Pendulum System  |  t = $(round(t_steps[i], digits=3)) s",
             legend=false,
-            size=(700, 500),
+            size=(900, 500),
             left_margin=5mm, right_margin=5mm,
             bottom_margin=5mm, top_margin=8mm
         )
@@ -251,6 +251,10 @@ function animate_mechanism_forces(t_steps, solution, lambda_all; filename="resul
 
     N = length(t_steps)
 
+    # compute a scale factor to control vector length on plot
+    max_force = maximum(abs.(lambda_all[:, [1, 3, 4]]))     # max force magnitude
+    force_scale = 0.25 / max(max_force, 1e-6)                # scale so max vector is only 0.1 m on plot (protect against dividing by zero)
+
     # pre-compute axis limits
     all_x1 = [solution(t)[1] for t in t_steps]
     all_y1 = zeros(N)
@@ -265,13 +269,22 @@ function animate_mechanism_forces(t_steps, solution, lambda_all; filename="resul
     all_xs = vcat(all_x1, all_x2, all_end_x, all_pin_x)
     all_ys = vcat(all_y1, all_y2, all_end_y, all_pin_y)
 
-    pad = 0.08
-    xl  = (minimum(all_xs) - track_len, maximum(all_xs) + pad)
-    yl  = (minimum(all_ys) - pad, maximum(all_ys) + pad)
+    # compute arrow tip positions for axis limits
+    arrow_tip_x = [all_pin_x[i] + force_scale * lambda_all[i, 3] for i in 1:N]
+    arrow_tip_y = [all_pin_y[i] + force_scale * lambda_all[i, 4] for i in 1:N]
+    arrow_tip_x_neg = [all_pin_x[i] - force_scale * lambda_all[i, 3] for i in 1:N]
+    arrow_tip_y_neg = [all_pin_y[i] - force_scale * lambda_all[i, 4] for i in 1:N]
+    track_tip_y = [force_scale * lambda_all[i, 1] for i in 1:N]
 
-    # compute a scale factor to control vector length on plot
-    max_force = maximum(abs.(lambda_all[:, [1, 3, 4]]))     # max force magnitude
-    force_scale = 0.1 / max(max_force, 1e-6)                # scale so max vector is only 0.1 m on plot (protect against dividing by zero)
+    all_xs_with_arrows = vcat(all_xs, arrow_tip_x, arrow_tip_x_neg)
+    all_ys_with_arrows = vcat(all_ys, arrow_tip_y, arrow_tip_y_neg, track_tip_y)
+
+    pad = 0.08
+    xl = (min(minimum(all_xs_with_arrows), -track_len) - pad, maximum(all_xs_with_arrows) + pad)
+    yl = (minimum(all_ys_with_arrows) - pad, maximum(all_ys_with_arrows) + pad)
+
+    # xl = (min(minimum(all_xs), - track_len) - pad, maximum(all_xs) + pad)
+    # yl = (minimum(all_ys) - pad, maximum(all_ys) + pad)
 
     anim = @animate for i in 1:N
 
@@ -282,14 +295,19 @@ function animate_mechanism_forces(t_steps, solution, lambda_all; filename="resul
             aspect_ratio=:equal,
             xlabel="x (m)", ylabel="y (m)",
             title="Spring-Pendulum System with Constraint Forces  |  t = $(round(t_steps[i], digits=3)) s",
-            legend=false,
-            size=(700, 500),
+            legend=:outertopright,
+            size=(1100, 500),
             left_margin=5mm, right_margin=5mm,
             bottom_margin=5mm, top_margin=8mm
         )
 
         # draw mechanism
         draw_mechanism!(p, qi)
+
+        # legend entries (invisible lines with labels)
+        plot!(p, [], [], color=:red, lw=2, label="Pin Constraint Force on Block")
+        plot!(p, [], [], color=:purple, lw=2, label="Pin Constraint Force on Bar")
+        plot!(p, [], [], color=:green, lw=2, label="Track Normal Constraint Force")
 
         # pin joint location
         theta2 = qi[6]
@@ -299,17 +317,17 @@ function animate_mechanism_forces(t_steps, solution, lambda_all; filename="resul
         # pin force on block (λ₃ in x-direction, λ₄ in y-direction)
         quiver!(p, [pin_x], [pin_y],
                 quiver=([force_scale * lambda_all[i, 3]], [force_scale * lambda_all[i, 4]]),
-                color=:red, linewidth=2)
+                color=:red, linewidth=3)
 
         # pin force on bar (-λ₃, -λ₄)
         quiver!(p, [pin_x], [pin_y],
                 quiver=([-force_scale * lambda_all[i, 3]], [-force_scale * lambda_all[i, 4]]),
-                color=:purple, linewidth=2)
+                color=:purple, linewidth=3)
 
         # track normal force on block (λ₁ in y-direction, drawn from block bottom)
         quiver!(p, [qi[1]], [qi[2] - block_h/2],
                 quiver=([0.0], [force_scale * lambda_all[i, 1]]),
-                color=:green, linewidth=2)
+                color=:green, linewidth=3)
 
     end
 
