@@ -239,6 +239,86 @@ function animate_mechanism(t_steps, solution; filename="results/mechanism.gif", 
 end
 
 # ----------------------------------------------------------------
+# Mechanism Animation with Constraint Force Vectors
+# ----------------------------------------------------------------
+
+"""
+    animate_mechanism_forces(t_steps, solution, lambda_all; filename="results/mechanism_forces.gif", fps=30)
+
+Animate the Spring-Pendulum mechanism over time with constraint force vectors overlaid.
+"""
+function animate_mechanism_forces(t_steps, solution, lambda_all; filename="results/mechanism_forces.gif", fps=30)
+
+    N = length(t_steps)
+
+    # pre-compute axis limits
+    all_x1 = [solution(t)[1] for t in t_steps]
+    all_y1 = zeros(N)
+    all_x2 = [solution(t)[4] for t in t_steps]
+    all_y2 = [solution(t)[5] for t in t_steps]
+
+    all_end_x = [solution(t)[4] + half_L * cos(solution(t)[6]) for t in t_steps]
+    all_end_y = [solution(t)[5] + half_L * sin(solution(t)[6]) for t in t_steps]
+    all_pin_x = [solution(t)[4] - half_L * cos(solution(t)[6]) for t in t_steps]
+    all_pin_y = [solution(t)[5] - half_L * sin(solution(t)[6]) for t in t_steps]
+
+    all_xs = vcat(all_x1, all_x2, all_end_x, all_pin_x)
+    all_ys = vcat(all_y1, all_y2, all_end_y, all_pin_y)
+
+    pad = 0.08
+    xl  = (minimum(all_xs) - track_len, maximum(all_xs) + pad)
+    yl  = (minimum(all_ys) - pad, maximum(all_ys) + pad)
+
+    # compute a scale factor to control vector length on plot
+    max_force = maximum(abs.(lambda_all[:, [1, 3, 4]]))     # max force magnitude
+    force_scale = 0.1 / max(max_force, 1e-6)                # scale so max vector is only 0.1 m on plot (protect against dividing by zero)
+
+    anim = @animate for i in 1:N
+
+        qi = solution(t_steps[i])[1:6]
+
+        p = plot(
+            xlim=xl, ylim=yl,
+            aspect_ratio=:equal,
+            xlabel="x (m)", ylabel="y (m)",
+            title="Spring-Pendulum System with Constraint Forces  |  t = $(round(t_steps[i], digits=3)) s",
+            legend=false,
+            size=(700, 500),
+            left_margin=5mm, right_margin=5mm,
+            bottom_margin=5mm, top_margin=8mm
+        )
+
+        # draw mechanism
+        draw_mechanism!(p, qi)
+
+        # pin joint location
+        theta2 = qi[6]
+        pin_x = qi[4] - half_L * cos(theta2)
+        pin_y = qi[5] - half_L * sin(theta2)
+
+        # pin force on block (λ₃ in x-direction, λ₄ in y-direction)
+        quiver!(p, [pin_x], [pin_y],
+                quiver=([force_scale * lambda_all[i, 3]], [force_scale * lambda_all[i, 4]]),
+                color=:red, linewidth=2)
+
+        # pin force on bar (-λ₃, -λ₄)
+        quiver!(p, [pin_x], [pin_y],
+                quiver=([-force_scale * lambda_all[i, 3]], [-force_scale * lambda_all[i, 4]]),
+                color=:purple, linewidth=2)
+
+        # track normal force on block (λ₁ in y-direction, drawn from block bottom)
+        quiver!(p, [qi[1]], [qi[2] - block_h/2],
+                quiver=([0.0], [force_scale * lambda_all[i, 1]]),
+                color=:green, linewidth=2)
+
+    end
+
+    gif(anim, filename, fps=fps)
+    println("Saved animation: $filename")
+
+end
+
+# ----------------------------------------------------------------
 # Static Plot: Positions vs. Time
 # ----------------------------------------------------------------
 
@@ -446,7 +526,7 @@ end
 # Exported Functions/Parameters
 # ----------------------------------------------------------------
 
-export draw_mechanism!, animate_mechanism
+export draw_mechanism!, animate_mechanism, animate_mechanism_forces
 export plot_positions, plot_velocities, plot_accelerations
 export plot_constraint_forces
 export plot_constraint_residual
