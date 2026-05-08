@@ -8,8 +8,7 @@
     <img src="archive/spring_compound-2_bodies.png" width = 500>
 </p>
 
-In this project, a rigid bar is connected to a sliding block along a
-horizontal track. The sliding block is connected to a spring that stretches and compresses. The rigid bar $L = 0.4~m$ acts as a compound pendulum.  
+In this project, a rigid bar is connected to a sliding block along a horizontal track. The sliding block is connected to a spring that stretches and compresses. The rigid bar $L = 0.4~m$ acts as a compound pendulum.  
 
 1. $x_1-y_1-$ describes block 1 position and orientation, $\theta_1$
 2. $x_2-y_2-$ describes the rigid bar position and orientation, $\theta_2$
@@ -17,13 +16,13 @@ horizontal track. The sliding block is connected to a spring that stretches and 
 The applied forces are, 
 
 1. Spring attached to block 1, $F = -k x_1$ where $k = 10~N/m$
-2. gravity acting on block 1 and the rigid bar, $F_1 = -m_1g\hat{j}$ and $F_2 = -m_2 g\hat{j}$ where $m_1 = 0.1$ kg and $m_2 = 0.3$ kg
+2. Gravity acting on block 1 and the rigid bar, $F_1 = -m_1g\hat{j}$ and $F_2 = -m_2 g\hat{j}$ where $m_1 = 0.1$ kg and $m_2 = 0.3$ kg
  
-In this project, you need to 
+The objectives of this project were to: 
 
 1. Determine constraint equations $C(\mathbf{q},~t)$
 2. Create an augmented solution method for the dynamic motion of these two moving parts
-3. Cisualize the motion of the system as the two parts complete at least one oscillation
+3. Visualize the motion of the system as the two parts complete at least one oscillation
 4. Calculate and show (graph or vectors) the constraint forces acting on the 2-body system
 
 ## Results
@@ -68,7 +67,7 @@ The simulation above was derived using the Augmented Multibody Dynamics (MBD) ap
 
 A few important conclusions can be drawn from the results. From the position plots, one can observe that the block position $x_1$ oscillates while $y_1$ and $\theta_1$ remain at zero, confirming that the track and rotation constraints remain satisfied throughout the simulation.
 
-The constraint force plots and the animation with constraint force vectors demonstrate the magnitude and direction of all constraint and reaction forces. The track normal force ($\lambda_1$) oscillates as the bar swings. When the bar swings to the vertical position, the centripetal acceleration increases the load on the track and the pin.
+The constraint force plots and the animation with constraint force vectors demonstrate the magnitude and direction of all constraint and reaction forces. The track normal force ($\lambda_1$) oscillates as the bar swings. When the bar swings through the vertical position, the centripetal acceleration increases the load on the track and the pin.
 
 The pin joint reaction forces ($\lambda_3$, $\lambda_4$) show the $x$ and $y$ components of the force transmitted between the bar and block at the hinge. In the animation with constraint force vectors, one can observe that the pin force on the block (red) and bar (purple) are always equal in magnitude and opposite in direction, demonstrating Newton's third law at the joint. It should be noted that the constraint $C_2 = \theta_1 = 0$ represents the track preventing rotation of the block, and $\lambda_2$ is the moment that the track would need to exert to enforce that constraint. Since all forces act through the block's center of mass, there is no moment for the constraint reaction force to oppose; therefore, it remains zero throughout the entire simulation.
 
@@ -80,7 +79,7 @@ Finally, the constraint residual plot confirms that all constraints remain satis
 
 In planar (2D) multibody dynamics, each unconstrained body has 3 degrees of freedom:
 - Translation in the $x$-direction
-- Translation in the $Y$-direction
+- Translation in the $y$-direction
 - Rotation by angle $\theta$. 
 
 Therefore, the generalized coordinate vector for this project can be expressed as:
@@ -97,7 +96,7 @@ $$
 \end{bmatrix}
 $$
 
-If a the center of body i is located at $\vec{R}_i = [x_i, y_i]^T$ in the global coordinate system and orientation $\theta_i$, then point p located at $\vec{s}^{(i)} = [s_x, s_y]^T$ in the body's local frame has global position:
+If the center of body i is located at $\vec{R}_i = [x_i, y_i]^T$ in the global coordinate system and orientation $\theta_i$, then point p located at $\vec{s}^{(i)} = [s_x, s_y]^T$ in the body's local frame has global position:
 
 $$
 \vec{r}_P = \vec{R}_i + A(\theta_i) \vec{s}^{(i)}
@@ -113,7 +112,7 @@ A(\theta_i) =
 \end{bmatrix}
 $$
 
-For this project, there are 6 coordinates and 2 degrees of freedom (the block is free to translate, and the bar is free to rotate). Therefore, $6 - 2 = 4$ constraint equations are required.
+For this project, there are 6 coordinates and 2 degrees of freedom (the block is free to translate horizontally, and the bar is free to rotate). Therefore, $6 - 2 = 4$ constraint equations are required.
 
 ### Block Center (Body 1)
 
@@ -681,7 +680,7 @@ The overall solution process for the system above will consist of the following 
 
 1. Solve for initial $\vec{q}_0$ such that $\vec{C}\left(\vec{q}_0, t=0\right) = \vec{0}$
 2. Set $\dot{\vec{q}}_0 = 0$ (released from rest)
-3. Assemble initial state $y_0 = \left[\vec{q}_0, \dot{\vec{q}}_0\right]$
+3. Assemble initial state $\vec{y}_0 = \left[\vec{q}_0, \dot{\vec{q}}_0\right]^T$
 4. Integrate from $t = 0$ to $t = t_{\text{end}}$
 5. Post-process
 6. Generate plots and animations
@@ -694,7 +693,7 @@ Where at each time step, $i$, the integrator uses $\vec{q}_i$ and $\dot{\vec{q}}
 5. Assemble the augmented system
 6. Apply Baumgarte stabilization
 7. Solve the linear system for $\ddot{\vec{q}}_i$ and $\vec{\lambda}_i$
-8. Return $\dot{y}_i = [\dot{\vec{q}}_i, \ddot{\vec{q}}_i]$ back to the integrator
+8. Return $\dot{\vec{y}}_i = [\dot{\vec{q}}_i, \ddot{\vec{q}}_i]^T$ back to the integrator
 
 ## Reproducing Results
 From the project directory, run:
