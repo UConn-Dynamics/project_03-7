@@ -28,7 +28,40 @@ In this project, you need to
 
 ## Results
 
-TBD
+### Mechanism Animation
+<p align="center">
+    <img src="results/mechanism.gif" width = 700>
+</p>
+
+### Mechanism Animation with Reaction Force Vectors
+<p align="center">
+    <img src="results/mechanism_forces.gif" width = 700>
+</p>
+
+### Positions vs. Time
+<p align="center">
+    <img src="results/positions_vs_time.png" width = 700>
+</p>
+
+### Velocities vs. Time
+<p align="center">
+    <img src="results/velocities_vs_time.png" width = 700>
+</p>
+
+### Accelerations vs. Time
+<p align="center">
+    <img src="results/accelerations_vs_time.png" width = 700>
+</p>
+
+### Constraint Forces vs. Time
+<p align="center">
+    <img src="results/constraint_forces.png" width = 700>
+</p>
+
+### Constraint Residual
+<p align="center">
+    <img src="results/constraint_residual.png" width = 700>
+</p>
 
 ## Conclusions
 
