@@ -277,7 +277,7 @@ function plot_positions(t_steps, solution; filename="results/positions_vs_time.p
     # combine into 2-row layout
     p = plot(p1, p2, layout=(2, 1), size=(800, 700),
              left_margin=10mm, right_margin=15mm,
-             bottom_margin=5mm, top_margin=5mm)
+             bottom_margin=5mm, top_margin=8mm)
 
     savefig(p, filename)
     println("Saved: $filename")
@@ -320,7 +320,47 @@ function plot_velocities(t_steps, solution; filename="results/velocities_vs_time
 
     p = plot(p1, p2, layout=(2, 1), size=(800, 700),
              left_margin=10mm, right_margin=15mm,
-             bottom_margin=5mm, top_margin=5mm)
+             bottom_margin=5mm, top_margin=8mm)
+
+    savefig(p, filename)
+    println("Saved: $filename")
+
+end
+
+# ----------------------------------------------------------------
+# Static Plot: Accelerations vs. Time
+# ----------------------------------------------------------------
+
+"""
+    plot_accelerations(t_steps, ddq_all; filename="results/accelerations_vs_time.png")
+
+Plot generalized accelerations vs. time.
+"""
+function plot_accelerations(t_steps, ddq_all; filename="results/accelerations_vs_time.png")
+
+    # ----- Panel 1: Block (Body 1) ------------------------------
+    p1 = plot(t_steps, ddq_all[:, 1], label=L"\ddot{x}_1", lw=2, color=:blue, legend=:topleft)
+    plot!(p1, t_steps, ddq_all[:, 2], label=L"\ddot{y}_1", lw=2, color=:orange)
+    ylabel!(p1, "Acceleration (m/s²)")
+    p1r = twinx(p1)
+    plot!(p1r, t_steps, ddq_all[:, 3], label=L"\ddot{\theta}_1", lw=2, ls=:dash, color=:green, legend=:topright)
+    ylims!(p1r, (-0.5, 0.5))
+    ylabel!(p1r, "Angular Acceleration (rad/s²)")
+    title!(p1, "Block Accelerations (Body 1)")
+
+    # ----- Panel 2: Bar (Body 2) --------------------------------
+    p2 = plot(t_steps, ddq_all[:, 4], label=L"\ddot{x}_2", lw=2, color=:blue, legend=:topleft)
+    plot!(p2, t_steps, ddq_all[:, 5], label=L"\ddot{y}_2", lw=2, color=:orange)
+    xlabel!(p2, "Time (s)")
+    ylabel!(p2, "Acceleration (m/s²)")
+    p2r = twinx(p2)
+    plot!(p2r, t_steps, ddq_all[:, 6], label=L"\ddot{\theta}_2", lw=2, ls=:dash, color=:green, legend=:topright)
+    ylabel!(p2r, "Angular Acceleration (rad/s²)")
+    title!(p2, "Bar Accelerations (Body 2)")
+
+    p = plot(p1, p2, layout=(2, 1), size=(800, 700),
+             left_margin=10mm, right_margin=15mm,
+             bottom_margin=5mm, top_margin=8mm)
 
     savefig(p, filename)
     println("Saved: $filename")
@@ -361,7 +401,7 @@ function plot_constraint_forces(t_steps, lambda_all; filename="results/constrain
 
     p = plot(p1, p2, layout=(2, 1), size=(800, 700),
              left_margin=10mm, right_margin=15mm,
-             bottom_margin=5mm, top_margin=5mm)
+             bottom_margin=5mm, top_margin=8mm)
 
     savefig(p, filename)
     println("Saved: $filename")
@@ -387,13 +427,15 @@ function plot_constraint_residual(t_steps, solution; filename="results/constrain
         residuals[i] = sqrt(sum(C_val .^ 2))     # Euclidean norm/L2 Residual
     end
 
+    residuals = max.(residuals, 1e-16)           # avoid plotting 0 on log scale 
+
     p = plot(t_steps, residuals, lw=2, color=:red,
-             xlabel="Time (s)", ylabel=L"\|\vec{C} \|",
+             xlabel="Time (s)", ylabel="Constraint L2 Residual",
              title="Constraint L2 Residual vs. Time",
              legend=false, yscale=:log10,
              size=(700, 400),
              left_margin=10mm, right_margin=5mm,
-             bottom_margin=5mm, top_margin=5mm)
+             bottom_margin=5mm, top_margin=8mm)
 
     savefig(p, filename)
     println("Saved: $filename")
@@ -405,7 +447,7 @@ end
 # ----------------------------------------------------------------
 
 export draw_mechanism!, animate_mechanism
-export plot_positions, plot_velocities
+export plot_positions, plot_velocities, plot_accelerations
 export plot_constraint_forces
 export plot_constraint_residual
 

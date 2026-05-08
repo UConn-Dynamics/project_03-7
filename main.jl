@@ -90,6 +90,10 @@ function main()
     lambda_all = compute_lambda(solution, t_steps)
     println("  Done. Extracted $(size(lambda_all, 2)) multipliers at $(size(lambda_all, 1)) time steps.")
 
+    # ----- Compute Accelerations ----------------------------------------
+    println("\nComputing accelerations...")
+    ddq_all = compute_accelerations(solution, t_steps)
+
     # ----- Generate Static Plots ----------------------------------------
     println("\nGenerating plots...")
 
@@ -98,6 +102,9 @@ function main()
 
     # velocities vs time
     plot_velocities(t_steps, solution, filename="results/velocities_vs_time.png")
+
+    # accelerations vs time
+    plot_accelerations(t_steps, ddq_all, filename="results/accelerations_vs_time.png")
 
     # constraint forces vs time
     plot_constraint_forces(t_steps, lambda_all, filename="results/constraint_forces.png")
@@ -115,6 +122,7 @@ function main()
     println("     Static Plots:")
     println("          - positions_vs_time.png")
     println("          - velocities_vs_time.png")
+    println("          - accelerations_vs_time.png")
     println("          - constraint_forces.png")
     println("          - constraint_residual.png")
     println("          - energy_vs_time.png")
