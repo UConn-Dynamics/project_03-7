@@ -9,7 +9,7 @@
 </p>
 
 In this project, a rigid bar is connected to a sliding block along a
-horizontal tracks. The sliding block is connected to a spring that stretches and compresses. The rigid bar $L = 0.4~m$ acts as a compound pendulum.  
+horizontal track. The sliding block is connected to a spring that stretches and compresses. The rigid bar $L = 0.4~m$ acts as a compound pendulum.  
 
 1. $x_1-y_1-$ describes block 1 position and orientation, $\theta_1$
 2. $x_2-y_2-$ describes the rigid bar position and orientation, $\theta_2$
@@ -21,10 +21,10 @@ The applied forces are,
  
 In this project, you need to 
 
-1. determine constraint equations $C(\mathbf{q},~t)$
+1. Determine constraint equations $C(\mathbf{q},~t)$
 2. Create an augmented solution method for the dynamic motion of these two moving parts
-3. visualize the motion of the system as the two parts complete at least one oscillation
-4. calculate and show (graph or vectors) the constraint forces acting on the 2-body system
+3. Cisualize the motion of the system as the two parts complete at least one oscillation
+4. Calculate and show (graph or vectors) the constraint forces acting on the 2-body system
 
 ## Results
 
@@ -64,8 +64,15 @@ In this project, you need to
 </p>
 
 ## Conclusions
+The simulation above was derived using the Augmented Multibody Dynamics (MBD) approach and demonstrates the coupled dynamics of a spring-block system with an attached compound pendulum. For this simulation, the bar is released from rest at a horizontal position ($\theta_2 = 0$) with the block at the spring's natural length ($x_1 = 0$). Gravity then pulls the bar downward, beginning the simulation. As the bar swings, it pulls on the block through the pin joint, dragging the block along the track. The spring then pulls the block back. As a result, this coupling between the bar and the block through the pin creates oscillation in both $\theta_2$ and $x_1$.
 
-TBD
+A few important conclusions can be drawn from the results. From the position plots, one can observe that the block position $x_1$ oscillates while $y_1$ and $\theta_1$ remain at zero, confirming that the track and rotation constraints remain satisfied throughout the simulation.
+
+The constraint force plots and the animation with constraint force vectors demonstrate the magnitude and direction of all constraint and reaction forces. The track normal force ($\lambda_1$) oscillates as the bar swings. When the bar swings to the vertical position, the centripetal acceleration increases the load on the track and the pin.
+
+The pin joint reaction forces ($\lambda_3$, $\lambda_4$) show the $x$ and $y$ components of the force transmitted between the bar and block at the hinge. In the animation with constraint force vectors, one can observe that the pin force on the block (red) and bar (purple) are always equal in magnitude and opposite in direction, demonstrating Newton's third law at the joint. It should be noted that the constraint $C_2 = \theta_1 = 0$ represents the track preventing rotation of the block, and $\lambda_2$ is the moment that the track would need to exert to enforce that constraint. Since all forces act through the block's center of mass, there is no moment for the constraint reaction force to oppose; therefore, it remains zero throughout the entire simulation.
+
+Finally, the constraint residual plot confirms that all constraints remain satisfied to high precision throughout the simulation due to the Baumgarte stabilization technique with $\alpha = \beta = 5$.
 
 ## Derivations
 
@@ -127,8 +134,7 @@ $$
 $$
 
 ### Bar Pin End (Body 2)
-
-The bar's local $x$-axis runs along its length. The bar has length $L$, and its center of mass is at the midpoint, therefore the end that connects to the block is at local coordinates $\vec{s}_{pin,2} = [-L/2,~ 0]^T$ 
+The bar’s local $x$-axis runs along its length. The bar has length $L$, and its center of mass is at the midpoint. The end that connects to the block is at local coordinates $\vec{s}_{pin,2} = [-L/2,~ 0]^T$
 
 To express this point in global coordinates:
 
@@ -419,7 +425,7 @@ $$
 
 where $w = 0.10$ m and $h = 0.05$ m are the block dimensions used for visualization.
 
-**Bar (Body 2) Moment of Inertia:** For a thin rod rotating about its center, the mass moment of inertia can expressed as:
+**Bar (Body 2) Moment of Inertia:** For a thin rod rotating about its center, the mass moment of inertia can be expressed as:
 
 $$
 I_2 = \frac{1}{12} m_2 L^2 = \frac{1}{12}(0.3)(0.4)^2 = 0.004 \text{ kg⋅m}^2
@@ -580,7 +586,7 @@ $$
 In this case, $M$ is a $6 \times 6$ mass matrix, $C_{\vec{q}}$ is a $4 \times 6$ Jacobian, $\vec{Q}\_e$ contains the external forces, and $\vec{Q}\_d$ collects the known terms from differentiating the constraints twice. The unknowns are the accelerations $\ddot{\vec{q}}$, and the Lagrange multipliers ($\lambda_{1}$, $\lambda_{2}$, $\lambda_{3}$, $\lambda_{4}$). Therefore, at each time step, a $10 \times 10$ linear system must be solved.
 
 ### Baumgarte Stabilization
-Instabilities resulting from integration at the acceleration level are corrected using the  the Baumgarte stabilization technique. In order to do so, the acceleration level constraints are re-expressed as:
+Instabilities resulting from integration at the acceleration level are corrected using the Baumgarte stabilization technique. In order to do so, the acceleration level constraints are re-expressed as:
 
 $$
 C_q \ddot{\vec{q}} = \vec{Q}_d - 2\alpha \left( C_q \dot{\vec{q}} + \vec{C}_t \right) - \beta^2 \vec{C}
@@ -597,14 +603,14 @@ where $\alpha = 5$ and $\beta = 5$ are stabilization parameters that control how
 ### Initial Conditions
 Before starting the simulation, the following parameters are required:
 - $\vec{q}_0$: initial positions that satisfy all constraints
-- $\dot{\vec{q}}_0$: initial velocities that satisfy all constraints (the simplest selection is releasng the objects from rest, so $\dot{\vec{q}}_0 = \vec{0}$)
+- $\dot{\vec{q}}_0$: initial velocities that satisfy all constraints (the simplest selection is releasing the objects from rest, so $\dot{\vec{q}}_0 = \vec{0}$)
 
 Given that there are 4 constraint equations and 6 unknowns, the following can be specified to determine the initial configuration of the system:
 
 - $x_1(0) = 0$ m (block at the spring's natural length)
 - $\theta_2(0) = 0$ rad (bar initially horizontal)
 
-The system now has an equal ammount of equations as unknowns, and can be solved for the initial time step. From the constraint equations at $t = 0$ with $x_1 = 0$, $\theta_2 = 0$:
+The system now has an equal number of equations as unknowns, and can be solved for the initial time step. From the constraint equations at $t = 0$ with $x_1 = 0$, $\theta_2 = 0$:
 
 - $C_1$: $y_1 = 0$
 - $C_2$: $\theta_1 = 0$
@@ -634,7 +640,7 @@ $$
 \end{bmatrix}
 $$
 
-Thus the system is released from rest with the bar in the horizontal position and gravity will pull the bar downward, initiating the motion of the system.
+Thus, the system is released from rest with the bar in the horizontal position, and gravity will pull the bar downward, initiating the motion of the system.
 
 ### Extracting Constraint Forces
 The Lagrange multipliers $\vec{\lambda} = [\lambda_1, \lambda_2, \lambda_3, \lambda_4]^T$ represent the magnitudes of the constraint forces associated with each constraint equation. Where each $\lambda_i$ is associated with one constraint:
@@ -671,14 +677,14 @@ C_q^T \vec{\lambda} =
 $$
 
 ### Solution Process
-The overall solution process for the system above will consist the following steps.
+The overall solution process for the system above will consist of the following steps.
 
 1. Solve for initial $\vec{q}_0$ such that $\vec{C}\left(\vec{q}_0, t=0\right) = \vec{0}$
 2. Set $\dot{\vec{q}}_0 = 0$ (released from rest)
 3. Assemble initial state $y_0 = \left[\vec{q}_0, \dot{\vec{q}}_0\right]$
 4. Integrate from $t = 0$ to $t = t_{\text{end}}$
 5. Post-process
-6. Generate plots and animation
+6. Generate plots and animations
 
 Where at each time step, $i$, the integrator uses $\vec{q}_i$ and $\dot{\vec{q}}_i$ from the current state to:
 1. Build the mass matrix, $M$
