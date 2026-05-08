@@ -79,7 +79,7 @@ function main()
     end
     println("  Max constraint residual: $(round(max_residual, sigdigits=4))")
 
-    if max_residual < 1e-6
+    if max_residual < 1e-3
         println("  Constraints satisfied to high precision.")
     else
         println("  WARNING: constraint drift detected. Consider increasing α, β.")

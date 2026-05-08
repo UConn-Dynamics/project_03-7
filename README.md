@@ -642,7 +642,7 @@ $$
 Thus, the system is released from rest with the bar in the horizontal position, and gravity will pull the bar downward, initiating the motion of the system.
 
 ### Extracting Constraint Forces
-The Lagrange multipliers $\vec{\lambda} = [\lambda_1, \lambda_2, \lambda_3, \lambda_4]^T$ represent the magnitudes of the constraint forces associated with each constraint equation. Where each $\lambda_i$ is associated with one constraint:
+The Lagrange multipliers $\vec{\lambda} = [\lambda_1, \lambda_2, \lambda_3, \lambda_4]^T$ represent the constraint forces associated with each constraint equation. Where each $\lambda_i$ is associated with one constraint:
 
 - $\lambda_1 \rightarrow C_1 = y_1 = 0 \rightarrow$ Normal force from track on block (y-direction)
 - $\lambda_2 \rightarrow C_2 = \theta_1 = 0 \rightarrow$ Moment from track preventing block rotation
