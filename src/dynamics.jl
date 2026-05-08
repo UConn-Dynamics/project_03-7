@@ -238,7 +238,7 @@ function compute_lambda(solution, t_steps)
 
         sols = A \ rhs                  # solve the system
 
-        lambda_all[i, :] = sols[n+1:n+nc]    # extract Lagrange multipliers
+        lambda_all[i, :] = -sols[n+1:n+nc]    # extract Lagrange multipliers, multiply by -1 because Mddq = Qe + Qc
 
     end
 

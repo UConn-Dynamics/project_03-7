@@ -614,7 +614,7 @@ The Lagrange multipliers $\vec{\lambda} = [\lambda_1, \lambda_2, \lambda_3, \lam
 The constraint forces on each generalized coordinate are expressed as
 
 $$
-\vec{Q}_c = C_q^T \vec{\lambda}
+\vec{Q}_c = -C_q^T \vec{\lambda}
 $$
 
 where:
