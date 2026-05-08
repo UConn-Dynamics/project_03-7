@@ -388,10 +388,10 @@ function plot_constraint_residual(t_steps, solution; filename="results/constrain
     end
 
     p = plot(t_steps, residuals, lw=2, color=:red,
-             xlabel="Time (s)", ylabel=L"\|vec{C}\|",
+             xlabel="Time (s)", ylabel=L"\|\vec{C} \|",
              title="Constraint L2 Residual vs. Time",
              legend=false, yscale=:log10,
-             size=(700, 500),
+             size=(700, 400),
              left_margin=10mm, right_margin=5mm,
              bottom_margin=5mm, top_margin=5mm)
 
